@@ -14,13 +14,13 @@ export async function GET(request: NextRequest) {
     const collateralTable = applications.map((app) => ({
       applicationId: app.applicationId,
       submittedAt: app.submittedAt,
-      applicantName: app.result.userDetails.fullName, // For reference
-      eligibilityStatus: app.result.eligibility.isEligible
+      applicantName: app.userDetails.fullName, // For reference
+      eligibilityStatus: app.eligibility.isEligible
         ? "ELIGIBLE"
         : "NOT ELIGIBLE",
-      ineligibilityReason: app.result.ineligibilityReason || null,
-      eligibleLoanTypes: app.result.eligibility.eligibleLoanTypes,
-      loanQuotes: app.result.quotes.map((quote) => ({
+      ineligibilityReason: app.ineligibilityReason || null,
+      eligibleLoanTypes: app.eligibility.eligibleLoanTypes,
+      loanQuotes: app.quotes.map((quote) => ({
         loanType: quote.loanType,
         loanAmount: quote.eligibleAmount,
         monthlyPayment: quote.monthlyPayment,
@@ -72,4 +72,3 @@ export async function OPTIONS() {
     }
   );
 }
-

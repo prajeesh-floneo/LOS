@@ -13,28 +13,28 @@ export async function GET(request: NextRequest) {
 
       // Table 1: Applicant Details
       applicantDetails: {
-        fullName: app.result.userDetails.fullName,
-        age: app.result.userDetails.age,
-        dateOfBirth: app.result.userDetails.dateOfBirth,
-        gender: app.result.userDetails.gender,
-        maritalStatus: app.result.userDetails.maritalStatus,
-        phoneNumber: app.result.userDetails.phoneNumber,
-        email: app.result.userDetails.email,
-        employmentType: app.result.userDetails.employmentType,
-        annualIncome: app.result.userDetails.annualIncome,
-        requestedLoanType: app.result.userDetails.requestedLoanType || null,
-        expectedLoanAmount: app.result.userDetails.expectedLoanAmount || null,
-        preferredTenure: app.result.userDetails.preferredTenure || null,
+        fullName: app.userDetails.fullName,
+        age: app.userDetails.age,
+        dateOfBirth: app.userDetails.dateOfBirth,
+        gender: app.userDetails.gender,
+        maritalStatus: app.userDetails.maritalStatus,
+        phoneNumber: app.userDetails.phoneNumber,
+        email: app.userDetails.email,
+        employmentType: app.userDetails.employmentType,
+        annualIncome: app.userDetails.annualIncome,
+        requestedLoanType: app.userDetails.requestedLoanType || null,
+        expectedLoanAmount: app.userDetails.expectedLoanAmount || null,
+        preferredTenure: app.userDetails.preferredTenure || null,
       },
 
       // Table 2: Collateral (Eligibility & Loan Quotes)
       collateral: {
-        eligibilityStatus: app.result.eligibility.isEligible
+        eligibilityStatus: app.eligibility.isEligible
           ? "ELIGIBLE"
           : "NOT ELIGIBLE",
-        ineligibilityReason: app.result.ineligibilityReason || null,
-        eligibleLoanTypes: app.result.eligibility.eligibleLoanTypes,
-        loanQuotes: app.result.quotes.map((quote) => ({
+        ineligibilityReason: app.ineligibilityReason || null,
+        eligibleLoanTypes: app.eligibility.eligibleLoanTypes,
+        loanQuotes: app.quotes.map((quote) => ({
           loanType: quote.loanType,
           loanAmount: quote.eligibleAmount,
           monthlyPayment: quote.monthlyPayment,
@@ -86,4 +86,3 @@ export async function OPTIONS() {
     }
   );
 }
-

@@ -30,30 +30,28 @@ export async function GET(
 
       // Table 1: Applicant Details
       applicantDetails: {
-        fullName: application.result.userDetails.fullName,
-        age: application.result.userDetails.age,
-        dateOfBirth: application.result.userDetails.dateOfBirth,
-        gender: application.result.userDetails.gender,
-        maritalStatus: application.result.userDetails.maritalStatus,
-        phoneNumber: application.result.userDetails.phoneNumber,
-        email: application.result.userDetails.email,
-        employmentType: application.result.userDetails.employmentType,
-        annualIncome: application.result.userDetails.annualIncome,
-        requestedLoanType:
-          application.result.userDetails.requestedLoanType || null,
-        expectedLoanAmount:
-          application.result.userDetails.expectedLoanAmount || null,
-        preferredTenure: application.result.userDetails.preferredTenure || null,
+        fullName: application.userDetails.fullName,
+        age: application.userDetails.age,
+        dateOfBirth: application.userDetails.dateOfBirth,
+        gender: application.userDetails.gender,
+        maritalStatus: application.userDetails.maritalStatus,
+        phoneNumber: application.userDetails.phoneNumber,
+        email: application.userDetails.email,
+        employmentType: application.userDetails.employmentType,
+        annualIncome: application.userDetails.annualIncome,
+        requestedLoanType: application.userDetails.requestedLoanType || null,
+        expectedLoanAmount: application.userDetails.expectedLoanAmount || null,
+        preferredTenure: application.userDetails.preferredTenure || null,
       },
 
       // Table 2: Collateral (Eligibility & Loan Quotes)
       collateral: {
-        eligibilityStatus: application.result.eligibility.isEligible
+        eligibilityStatus: application.eligibility.isEligible
           ? "ELIGIBLE"
           : "NOT ELIGIBLE",
-        ineligibilityReason: application.result.ineligibilityReason || null,
-        eligibleLoanTypes: application.result.eligibility.eligibleLoanTypes,
-        loanQuotes: application.result.quotes.map((quote) => ({
+        ineligibilityReason: application.ineligibilityReason || null,
+        eligibleLoanTypes: application.eligibility.eligibleLoanTypes,
+        loanQuotes: application.quotes.map((quote) => ({
           loanType: quote.loanType,
           loanAmount: quote.eligibleAmount,
           monthlyPayment: quote.monthlyPayment,

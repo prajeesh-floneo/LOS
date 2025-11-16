@@ -14,18 +14,18 @@ export async function GET(request: NextRequest) {
     const applicantDetailsTable = applications.map((app) => ({
       applicationId: app.applicationId,
       submittedAt: app.submittedAt,
-      fullName: app.result.userDetails.fullName,
-      age: app.result.userDetails.age,
-      dateOfBirth: app.result.userDetails.dateOfBirth,
-      gender: app.result.userDetails.gender,
-      maritalStatus: app.result.userDetails.maritalStatus,
-      phoneNumber: app.result.userDetails.phoneNumber,
-      email: app.result.userDetails.email,
-      employmentType: app.result.userDetails.employmentType,
-      annualIncome: app.result.userDetails.annualIncome,
-      requestedLoanType: app.result.userDetails.requestedLoanType || null,
-      expectedLoanAmount: app.result.userDetails.expectedLoanAmount || null,
-      preferredTenure: app.result.userDetails.preferredTenure || null,
+      fullName: app.userDetails.fullName,
+      age: app.userDetails.age,
+      dateOfBirth: app.userDetails.dateOfBirth,
+      gender: app.userDetails.gender,
+      maritalStatus: app.userDetails.maritalStatus,
+      phoneNumber: app.userDetails.phoneNumber,
+      email: app.userDetails.email,
+      employmentType: app.userDetails.employmentType,
+      annualIncome: app.userDetails.annualIncome,
+      requestedLoanType: app.userDetails.requestedLoanType || null,
+      expectedLoanAmount: app.userDetails.expectedLoanAmount || null,
+      preferredTenure: app.userDetails.preferredTenure || null,
     }));
 
     return NextResponse.json(
@@ -71,4 +71,3 @@ export async function OPTIONS() {
     }
   );
 }
-
