@@ -3,10 +3,10 @@ import { getApplication } from "@/lib/applicationStorage";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { applicationId: string } }
+  { params }: { params: Promise<{ applicationId: string }> }
 ) {
   try {
-    const { applicationId } = params;
+    const { applicationId } = await params;
 
     // Fetch the application from storage
     const application = getApplication(applicationId);
@@ -39,8 +39,10 @@ export async function GET(
         email: application.result.userDetails.email,
         employmentType: application.result.userDetails.employmentType,
         annualIncome: application.result.userDetails.annualIncome,
-        requestedLoanType: application.result.userDetails.requestedLoanType || null,
-        expectedLoanAmount: application.result.userDetails.expectedLoanAmount || null,
+        requestedLoanType:
+          application.result.userDetails.requestedLoanType || null,
+        expectedLoanAmount:
+          application.result.userDetails.expectedLoanAmount || null,
         preferredTenure: application.result.userDetails.preferredTenure || null,
       },
 
@@ -96,4 +98,3 @@ export async function OPTIONS() {
     }
   );
 }
-
